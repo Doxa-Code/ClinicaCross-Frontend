@@ -1,0 +1,80 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "eslint.packageManager": "yarn",
+
+    "terminal.integrated.fontSize": 14,
+
+    "extensions.ignoreRecommendations": true,
+
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.enabled": false,
+
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": true,
+
+    "breadcrumbs.enabled": false,
+
+    "typescript.updateImportsOnFileMove.enabled": "prompt",
+    "typescript.tsserver.log": "off",
+    "typescript.suggest.autoImports": true,
+
+    "javascript.updateImportsOnFileMove.enabled": "prompt",
+    "javascript.suggest.autoImports": true,
+
+    "files.autoSave": "off",
+
+    "autoimport.doubleQuotes": true,
+    "autoimport.showNotifications": true,
+
+    "editor.fontSize": 16,
+    "editor.fontFamily": "Fira Code",
+    "editor.minimap.enabled": false,
+    "editor.renderLineHighlight": "gutter",
+    "editor.tabSize": 2,
+    "editor.parameterHints.enabled": false,
+    "editor.codeActionsOnSave": true,
+
+    "workbench.colorTheme": "Dracula",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    "workbench.activityBar.visible": true,
+    "workbench.statusBar.visible": false,
+    "workbench.editor.enablePreview": true,
+
+    "[javascript]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+      }
+    },
+    "[javascriptreact]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+      }
+    },
+    "[typescript]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+      },
+      "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[typescriptreact]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+      }
+    },
+    "files.associations": {
+      ".sequelizerc": "javascript",
+      ".stylelintrc": "json",
+      ".prettierrc": "json"
+    },
+  }
+}

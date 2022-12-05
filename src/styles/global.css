@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply delay-1000 visible z-50;
+}
+
+@tailwind utilities;
+
+colgroup col,
+.fc-timegrid-axis,
+.fc-timegrid-axis-frame,
+.fc-timegrid-axis-cushion {
+  min-width: 80px;
+  @apply w-full;
+}
+
+.fc-prev-button,
+.fc-next-button {
+  @apply !bg-primary !border-primary;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-striped tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.shadow-text {
+  text-shadow: 1px 2px 4px #b8b8b8;
+}
+
+.bg-image {
+  background-image: url('/image/background.png');
+  background-size: cover;
+}
+
+table tbody tr,
+table thead th {
+  white-space: nowrap;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input:disabled {
+  color: #777;
+  background-color: #fff;
+}
+
+*:disabled {
+  color: #eee;
+  background-color: #666;
+}
+
+html {
+  -webkit-print-color-adjust: exact;
+}
+
+.float-label {
+  @apply absolute;
+  @apply left-4;
+  @apply -top-3;
+  @apply text-primary;
+  @apply bg-white;
+  @apply px-1;
+  @apply peer-placeholder-shown:top-4;
+  @apply peer-placeholder-shown:p-0;
+  @apply peer-placeholder-shown:text-gray-400;
+  @apply peer-focus:-top-3;
+  @apply peer-focus:left-4;
+  @apply peer-focus:text-primary;
+  @apply peer-focus:px-1;
+  @apply transition-all;
+}
+
+.float-input {
+  @apply w-full px-5 py-3 border rounded border-primary outline-none placeholder-shown:border-gray-200 focus:border-primary placeholder-transparent;
+}
+
+.min-padding-peer {
+  padding: 4px !important;
+}
+
+.float-group {
+  @apply w-full relative;
+}
+
+button {
+  @apply outline-none;
+}
+
+.switch {
+  @apply w-[60px] h-[35px] rounded-md cursor-pointer bg-[#c9c9c9] flex relative items-center transition-all duration-[0.1s];
+}
+
+.switch::before {
+  @apply content-[''] block bg-white w-[22px] h-[27px] rounded-md absolute left-[3px] transition-all duration-[0.1s];
+}
+
+.switch-input {
+  @apply hidden;
+}
+
+.switch-input:checked + .switch {
+  @apply bg-primary;
+}
+
+.switch-input:checked + .switch::before {
+  @apply bg-white;
+  left: calc(60px - 22px - 3px);
+}
+
+.fc-left h2 {
+  @apply !text-primary;
+}
+
+.fields-error {
+  @apply border !border-red-500;
+}

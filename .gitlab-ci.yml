@@ -1,0 +1,22 @@
+image: node:latest
+stages:
+  - deploy
+
+deploying:
+  stage: deploy
+  variables:
+    IMAGE: fernandoa12/vitavi:$CI_COMMIT_SHORT_SHA
+    APP: vitavi
+  environment:
+    name: production-$CI_COMMIT_SHA
+    url: $CI_PROJECT_NAME.$HOST_BACKEND
+  script:
+    - yarn
+    - yarn build
+    - echo $DOCKER_PASSWORD | sudo docker login -u $DOCKER_USER --password-stdin
+    - sudo docker build -t $IMAGE .
+    - sudo docker push $IMAGE
+    - $K8S_ACCESS "sudo kubectl set image deployment/$APP $APP=$IMAGE -n ingress"
+    - sudo docker rmi $(sudo docker images --filter=reference="$IMAGE") || true
+  only:
+    - master
