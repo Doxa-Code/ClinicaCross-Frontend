@@ -91,7 +91,11 @@ export default function UsuariosCadastro({
           </Select>
           <div className="flex justify-start items-center  gap-4">
             <Span>Ativo?</Span>
-            <ToggleButton defaultValue={ativo} onSelected={setAtivo} />
+            <ToggleButton
+              defaultValue={ativo}
+              onSelected={setAtivo}
+              name="ativo"
+            />
           </div>
         </div>
         <div className="flex w-full sm:flex-row flex-col justify-end py-7 gap-3">
