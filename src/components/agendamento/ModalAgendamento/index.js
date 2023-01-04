@@ -333,6 +333,16 @@ export default function ModalAgendamento() {
             />
             <ButtonAction
               show={
+                screen === 'Agendamento' &&
+                (payload.developer || payload.linked?._id)
+              }
+              onClick={() => handleChangeStatus(agendamento?._id, 'Realizado')}
+              theme="text-teal-500 border-teal-500"
+              icon="FaCheckDouble"
+              title="Realizado"
+            />
+            <ButtonAction
+              show={
                 agendamento.status !== 'Confirmado' &&
                 screen === 'Agendamento' &&
                 !['Cancelado', 'Realizado'].includes(agendamento.status) &&

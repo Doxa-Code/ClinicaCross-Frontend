@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import swal from '@sweetalert/with-react'
 import { Input, Span, ToggleButton } from '../../components/Form'
 import { useFetch } from '../../hooks/useFetch'
-import { menuData } from '../../data'
+import { menuData2 } from '../../data'
 
 export default function GruposCadastro({ grupoCadastro = {} }) {
   const { replace } = useRouter()
@@ -119,7 +119,7 @@ export default function GruposCadastro({ grupoCadastro = {} }) {
           </div>
         </div>
         <div className="grid xl:grid-cols-2 mt-5 gap-4">
-          {menuData.map(item => {
+          {menuData2.map(item => {
             if (item.multi) {
               return item.childrens.map(child => {
                 const active = acessos.includes(child.title)
