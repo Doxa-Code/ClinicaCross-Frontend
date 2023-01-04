@@ -105,7 +105,6 @@ export const menuData = [
     icon: 'FaFile',
     iconOpen: 'FaFile',
     title: 'Modelos',
-    multi: true,
     active: state => ['modelosReceita', 'modelosExames'].includes(state),
     childrens: [
       {
@@ -123,7 +122,142 @@ export const menuData = [
         route: '/modelos/declaracao',
         active: state => state === '/modelos/declaracao'
       }
+    ],
+    multi: true
+  },
+  {
+    icon: 'FaTablets',
+    title: 'Medicamentos',
+    route: '/medicamentos',
+    active: state => state === 'medicamentos'
+  },
+  {
+    icon: 'FaProjectDiagram',
+    title: 'Convênios',
+    route: '/convenios',
+    active: state => state === 'convenios'
+  },
+  {
+    icon: 'FaTasks',
+    title: 'Procedimentos',
+    route: '/procedimentos',
+    active: state => state === 'procedimentos'
+  },
+  {
+    icon: 'FaUserMd',
+    title: 'Médicos',
+    route: '/medicos',
+    active: state => state === 'medicos'
+  },
+  {
+    icon: 'FaUser',
+    title: 'Pacientes',
+    route: '/pacientes',
+    active: state => state === 'pacientes'
+  },
+  {
+    icon: 'FaDollarSign',
+    title: 'Valores procedimentos',
+    route: '/valoresProcedimentos',
+    active: state => state === 'valoresProcedimentos'
+  },
+  {
+    icon: 'FaCog',
+    title: 'Configurações',
+    route: '/configuracoes',
+    active: state => state === 'configuracoes'
+  }
+]
+
+export const menuData2 = [
+  {
+    icon: 'FaCalendarAlt',
+    title: 'Agendamento',
+    route: '/agendamento',
+    active: state => state === 'agendamento'
+  },
+  {
+    icon: 'FaFileContract',
+    title: 'Relatórios',
+    route: '/relatorios',
+    active: state => state === 'relatorios'
+  },
+  {
+    icon: 'FaMoneyBillWaveAlt',
+    title: 'Financeiro',
+    multi: true,
+    active: state =>
+      [
+        'formasDePagamentos',
+        'faturamentos',
+        'contasAReceber',
+        'repasseMedico'
+      ].includes(state),
+    childrens: [
+      {
+        title: 'Formas de Pagamento',
+        route: '/formasDePagamentos',
+        active: state => state === 'formasDePagamentos'
+      },
+      {
+        title: 'Contas a Receber',
+        route: '/contasAReceber',
+        active: state => state === 'contasAReceber'
+      },
+      {
+        title: 'Repasse médico',
+        route: '/repasseMedico',
+        active: state => state === 'repasseMedico'
+      },
+      {
+        title: 'Faturamentos',
+        route: '/faturamentos',
+        active: state => state === 'faturamentos'
+      }
     ]
+  },
+  {
+    icon: 'FaLock',
+    iconOpen: 'FaUnlock',
+    title: 'Acessos',
+    multi: true,
+    active: state => ['gruposDeUsuarios', 'usuarios'].includes(state),
+    childrens: [
+      {
+        title: 'Usuários',
+        route: '/usuarios',
+        active: state => state === 'usuarios'
+      },
+      {
+        title: 'Grupo de Usuários',
+        route: '/gruposDeUsuarios',
+        active: state => state === 'gruposDeUsuarios'
+      }
+    ]
+  },
+  {
+    icon: 'FaFile',
+    iconOpen: 'FaFile',
+    title: 'Modelos',
+    active: state => ['modelosReceita', 'modelosExames'].includes(state),
+    childrens: [
+      {
+        title: 'Receitas',
+        route: '/modelos/receitas',
+        active: state => state === '/modelos/receitas'
+      },
+      {
+        title: 'Atestados',
+        route: '/modelos/atestados',
+        active: state => state === '/modelos/atestados'
+      },
+      {
+        title: 'Declarações',
+        route: '/modelos/declaracao',
+        active: state => state === '/modelos/declaracao'
+      }
+    ],
+    multi: true
   },
   {
     icon: 'FaTablets',

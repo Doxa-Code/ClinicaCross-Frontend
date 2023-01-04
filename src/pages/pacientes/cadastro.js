@@ -357,6 +357,14 @@ export default function PacientesCadastro({
                 title="Telefone de contato"
                 name="telefone"
               />
+              <Input
+                title="E-mail"
+                name="email"
+              />
+              <Input
+                title="Responsável"
+                name="responsavel"
+              />
             </div>
 
             <Header className="col-span-3 mt-10">Endereço</Header>

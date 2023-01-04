@@ -400,7 +400,11 @@ export default function FormBloqueio() {
                   loadingMessage={() => 'Procurando...'}
                   onChange={medico => {
                     setDiasOcupados(medico?.diasDaSemana)
-                    setInicio()
+                    if(inicio){
+                    const d = inicio.getDay()
+                    if (!medico?.diasDaSemana?.includes(parseInt(d) - 1)){
+                      setInicio()
+                    }}
                     setMedico(medico)
                     const inputTime =
                       document.querySelector("input[name='time']")
