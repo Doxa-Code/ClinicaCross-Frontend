@@ -121,6 +121,11 @@ export const menuData = [
         title: 'Declarações',
         route: '/modelos/declaracao',
         active: state => state === '/modelos/declaracao'
+      },
+      {
+        title: 'Prontuários',
+        route: '/modelos/prontuario',
+        active: state => state === '/modelos/prontuario'
       }
     ],
     multi: true
@@ -255,6 +260,11 @@ export const menuData2 = [
         title: 'Declarações',
         route: '/modelos/declaracao',
         active: state => state === '/modelos/declaracao'
+      },
+      {
+        title: 'Prontuários',
+        route: '/modelos/prontuario',
+        active: state => state === '/modelos/prontuario'
       }
     ],
     multi: true

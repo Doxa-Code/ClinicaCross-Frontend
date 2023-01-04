@@ -95,9 +95,11 @@ export const useProntuarioStore = create(set => ({
   showProntuario: false,
   prontuario: {},
   readOnly: false,
+  modelosProntuarios: [],
   setShowProntuario: showProntuario => set({ showProntuario }),
   setProntuario: prontuario => set({ prontuario }),
-  setReadOnly: readOnly => set({ readOnly })
+  setReadOnly: readOnly => set({ readOnly }),
+  setModelosProntuarios: modelosProntuarios => set({ modelosProntuarios })
 }))
 
 export const useAtestadoStore = create(set => ({
