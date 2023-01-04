@@ -15,7 +15,8 @@ import {
   useAtestadoStore,
   useReceitaStore,
   createLogger,
-  useDeclaracaoStore
+  useDeclaracaoStore,
+  useProntuarioStore
 } from '../../hooks/store'
 import { useFetch } from '../../hooks/useFetch'
 import Modal from '../../components/Modal'
@@ -41,6 +42,7 @@ export default function Agendamento(props) {
   const { setStateLoading } = useMenuStore(state => state)
   const { setModelosAtestado } = useAtestadoStore(state => state)
   const { setModelosReceita } = useReceitaStore(state => state)
+  const { setModelosProntuarios } = useProntuarioStore(state => state)
   const { setModelosDeclaracoes } = useDeclaracaoStore(state => state)
   const {
     agendamentos,
@@ -122,10 +124,14 @@ export default function Agendamento(props) {
     const [modelosDeclaracoes, errorModelosDeclaracoes] = await fetch(
       '/modelos?tipo=Declaracao'
     )
+    const [modelosProntuario, errorModelosProntuario] = await fetch(
+      '/modelos?tipo=Prontuario'
+    )
     if (
       errorModelosReceitas ||
       errorModelosAtestados ||
-      errorModelosDeclaracoes
+      errorModelosDeclaracoes ||
+      errorModelosProntuario
     ) {
       swal('Erro', 'Erro ao carregar dados', 'error', {
         button: false,
@@ -139,6 +145,7 @@ export default function Agendamento(props) {
     setModelosReceita(modelosReceitas)
     setModelosAtestado(modelosAtestados)
     setModelosDeclaracoes(modelosDeclaracoes)
+    setModelosProntuarios(modelosProntuario)
   }
 
   async function handleLoadAgendamento(_id) {
