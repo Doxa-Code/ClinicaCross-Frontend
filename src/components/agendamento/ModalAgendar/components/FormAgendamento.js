@@ -634,6 +634,10 @@ export default function FormBloqueio() {
                             ]
                           },
                           {
+                            medico:
+                              medicoSelectRef.current.getValue()[0]?.value
+                          },
+                          {
                             inicio: {
                               $gte: `${data} 00:00:00`,
                               $lte: `${data} 23:59:59`
