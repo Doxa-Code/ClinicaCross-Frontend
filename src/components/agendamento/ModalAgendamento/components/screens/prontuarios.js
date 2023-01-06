@@ -5,7 +5,6 @@ import {
   useAgendamentoStore,
   useProntuarioStore
 } from '../../../../../hooks/store'
-import parse from 'html-react-parser'
 
 export default function Prontuarios() {
   const { agendamento, screen } = useAgendamentoStore(state => state)
@@ -64,9 +63,6 @@ export default function Prontuarios() {
                 Responsável
               </th>
               <th className="px-5 py-2 text-sm text-center border font-semibold text-gray-700">
-                Prontuário
-              </th>
-              <th className="px-5 py-2 text-sm text-center border font-semibold text-gray-700">
                 Ação
               </th>
             </tr>
@@ -84,13 +80,6 @@ export default function Prontuarios() {
                   className="rounded border px-2 py-1 w-full outline-none text-gray-500 text-sm"
                   placeholder="Responsável"
                   onChange={handleSearch('responsavel')}
-                />
-              </th>
-              <th className="p-2 border">
-                <input
-                  className="rounded border px-2 py-1 w-full outline-none text-gray-500 text-sm"
-                  placeholder="Prontuário"
-                  onChange={handleSearch('data')}
                 />
               </th>
               <th></th>
@@ -112,9 +101,6 @@ export default function Prontuarios() {
                     </td>
                     <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
                       {item.responsavel.nome}
-                    </td>
-                    <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
-                      {parse(item.data || '')}
                     </td>
                     <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
                       <div className="flex justify-center items-center gap-1">
