@@ -17,10 +17,7 @@ export default function FullCalendar({ setApi = () => {}, ...props }) {
   useEffect(() => {
     calendarRef.current
       .getApi()
-      .setOption(
-        'slotDuration',
-        formatSlotDuration(medico?.bloco || configuracoes?.bloco || 15)
-      )
+      .setOption('slotDuration', formatSlotDuration(configuracoes?.bloco || 15))
   }, [medico])
 
   const formatSlotDuration = bloco =>
@@ -36,15 +33,13 @@ export default function FullCalendar({ setApi = () => {}, ...props }) {
     <Calendar
       {...props}
       eventDestroy={info =>
-        ReactDOM.unmountComponentAtNode(info.el.querySelector(".fc-content"))
+        ReactDOM.unmountComponentAtNode(info.el.querySelector('.fc-content'))
       }
       ref={calendarRef}
       locale="pt-br"
       viewClassNames="mb-20"
       timeZone="Brazil/Sao_Paulo"
-      slotDuration={formatSlotDuration(
-        medico?.bloco || configuracoes?.bloco || 15
-      )}
+      slotDuration={formatSlotDuration(configuracoes?.bloco || 15)}
       minTime={`${configuracoes.inicio}:00` || '08:00:00'}
       maxTime={`${configuracoes.fim}:00` || '19:00:00'}
       allDaySlot={true}
