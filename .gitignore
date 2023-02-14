@@ -2,4 +2,3 @@ node_modules
 *-error.log
 .vscode
 .next
-*.yaml

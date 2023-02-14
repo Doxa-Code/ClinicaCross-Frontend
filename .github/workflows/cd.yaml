@@ -1,0 +1,59 @@
+name: Deploy
+on:
+  push:
+    branches: [master]
+    tags:
+      - "v*.."
+env:
+  APP: vitavi
+  IMAGE: fernandoa12/vitavi:${{ github.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker metadata
+        id: docker_metadata
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: $IMAGE
+          tag-sha: true
+
+      - name: QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Docker buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to docker hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USER }}
+          password: ${{ vars.DOCKER_TOKEN }}
+
+      - name: Install dependences
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Build Image
+        run: docker build -t $IMAGE .
+
+      - name: Push image
+        run: docker push $IMAGE
+
+      - name: Install dotctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ vars.DOCTL_TOKEN }}
+
+      - name: Setup kubectl
+        uses: matootie/dokube@v1.4.0
+        with:
+          personalAccessToken: ${{ vars.DOCTL_TOKEN }}
+          clusterName: doxa-code-production
+
+      - name: set deployment image
+        run: kubectl set image deployment/$APP $APP=$IMAGE -n ingress
