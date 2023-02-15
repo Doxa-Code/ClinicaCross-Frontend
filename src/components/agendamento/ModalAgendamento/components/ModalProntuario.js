@@ -12,6 +12,7 @@ import { useFetch } from '../../../../hooks/useFetch'
 import { Input, Select } from '../../../Form'
 import { getFieldsValue, setFieldsValue, StringInject } from '../../../../utils'
 import { variaveisAgendamentos, variaveisMedicos, variaveisPacientes } from '../../../../data'
+import { format } from 'date-fns'
 
 const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false
@@ -20,15 +21,23 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 export default function ModalProntuario() {
   const {
     setShowProntuario,
+    setEditProntuario,
     showProntuario,
     prontuario,
     readOnly,
-    modelosProntuarios
+    modelosProntuarios,
+    editProntuario
   } = useProntuarioStore(state => state)
   const { setAgendamento, agendamento } = useAgendamentoStore(state => state)
-  const { create } = useFetch()
+  const { create, update } = useFetch()
   const { payload } = usePayloadStore(state => state)
   const [data, mutate] = useState('')
+
+  useEffect(() => {
+    if (!showProntuario) {
+      setEditProntuario(false)
+    }
+  }, [showProntuario])
 
   useEffect(() => {
     setFieldsValue(prontuario)
@@ -38,24 +47,53 @@ export default function ModalProntuario() {
   async function handleSubmit(e) {
     e.preventDefault()
     const fields = getFieldsValue(e)
-    const [response, error] = await create(
-      `/pacientes/prontuario/${agendamento.paciente._id}`,
-      {
-        ...fields,
-        responsavel: payload._id,
-        data
-      }
-    )
-    if (error) return
+    if (editProntuario) {
+      const atendimentoUpdate = agendamento.paciente
+      atendimentoUpdate.prontuario = atendimentoUpdate.prontuario.map(prontuarioMap => {
+        if (prontuarioMap._id === prontuario._id) {
+          return {
+            ...prontuarioMap,
+            titulo: fields?.titulo,
+            data: data
+          }
+        }
+        return prontuarioMap
+      })
+      // eslint-disable-next-line no-unused-vars
+      const [_, error] = await update(
+        `/pacientes/${agendamento?.paciente._id}`,
+        {
+          prontuario: atendimentoUpdate.prontuario
+        }
+      )
+      if (error) return
+      setAgendamento({
+        ...agendamento,
+        paciente: {
+          ...agendamento?.paciente,
+          prontuario: atendimentoUpdate.prontuario
+        }
+      })
+    } else {
+      const [response, error] = await create(
+        `/pacientes/prontuario/${agendamento?.paciente._id}`,
+        {
+          ...fields,
+          responsavel: payload._id,
+          data,
+          dataCriacao: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+        }
+      )
+      if (error) return
 
-    setAgendamento({
-      ...agendamento,
-      paciente: {
-        ...agendamento.paciente,
-        prontuario: response
-      }
-    })
-    mutate('')
+      setAgendamento({
+        ...agendamento,
+        paciente: {
+          ...agendamento?.paciente,
+          prontuario: response
+        }
+      })
+    }
     setShowProntuario(false)
   }
 
@@ -116,7 +154,7 @@ export default function ModalProntuario() {
             title="Titulo"
             required
           />
-          <Select id="selectModeloProntuario" onChange={handleLoadProntuario} title="Modelo" className={readOnly && 'hidden'}>
+          <Select id="selectModeloProntuario" onChange={handleLoadProntuario} title="Modelo" className={readOnly | editProntuario && 'hidden'}>
             {modelosProntuarios.map(modelo => (
               <option value={modelo._id} key={modelo._id}>
                 {modelo.nome}
