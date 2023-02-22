@@ -105,10 +105,10 @@ export default function Historico() {
                       {format(parseISO(item.inicio), 'dd/MM/yyyy')}
                     </td>
                     <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
-                      {item.medico.nome}
+                      {item.medico?.nome}
                     </td>
                     <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
-                      {item.convenio.nome}
+                      {item.convenio?.nome}
                     </td>
                     <td className="px-5 py-2 text-sm font-normal text-center text-gray-700 border">
                       {item.procedimento?.descricaoProcedimento ||
