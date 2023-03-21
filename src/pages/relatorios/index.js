@@ -281,11 +281,11 @@ export default function Relatorios({
             </thead>
             <tbody className="text-gray-dark">
               {resultados.length > 0 ? (
-                resultados.map(resultado => {
+                resultados.map((resultado, index) => {
                   return (
                     <tr className="text-center" key={resultado._id}>
                       <td className="border text-left text-sm p-3">
-                        {resultado?.codigo}
+                        {index + 1}
                       </td>
                       <td className="border text-left text-sm p-3">
                         {resultado.paciente?.nome}
