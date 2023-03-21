@@ -54,7 +54,7 @@ export default function RepasseMedico({
       medico?.repasse?.find(
         repasse => repasse.convenio._id === agendamento.convenio._id
       )?.porcentagem 
-      ||  0
+      ||  100
     } 
     const valorRepasse =
       (parseFloat(valorHonorario) * parseFloat(repasse?.porcentagem)) / 100
@@ -206,7 +206,7 @@ export default function RepasseMedico({
               name="procedimento"
               placeholder="Nenhum procedimento selecionado!"
               options={procedimentos?.map(item => ({
-                label: item.descricaoProcedimento,
+                label: item?.descricaoProcedimento,
                 value: item._id
               }))}
               noOptionsMessage={() => 'Nenhum registro encontrado'}
@@ -312,7 +312,7 @@ export default function RepasseMedico({
                         {resultado.convenio.nome}
                       </td>
                       <td className="border text-left text-sm p-3">
-                        {resultado.procedimento.descricaoProcedimento}
+                        {resultado.procedimento?.descricaoProcedimento}
                       </td>
                       <td className="border text-left text-sm p-3">
                         {formatMoney(resultado.valor)}
@@ -324,11 +324,7 @@ export default function RepasseMedico({
                         {formatMoney(resultado.procedimentoFilme)}
                       </td>
                       <td className="border text-left text-sm p-3">
-                        {resultado.repasse ||
-                          medico?.repasse?.find(
-                            repasse =>
-                              repasse.convenio._id === resultado.convenio._id
-                          )?.porcentagem}%
+                        100%
                       </td>
                       <td className="border text-left text-sm p-3">
                         {format(parseISO(resultado.inicio), 'dd/MM/yyyy HH:mm')}
