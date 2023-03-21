@@ -119,7 +119,7 @@ export default function RepasseMedico({
     if (!fields.medico) return swal('Selecione um médico', ' ', 'warning')
     const [response, error] = await create('/agendamentos/relatorio', {
       ...fields,
-      status: 'Chegou',
+      status: 'Realizado',
       bloqueio: false
     })
 
