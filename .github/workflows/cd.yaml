@@ -3,10 +3,10 @@ on:
   push:
     branches: [master]
     tags:
-      - "v*.."
+      - 'v*..'
 env:
-  APP: vitavi
-  IMAGE: fernandoa12/vitavi:${{ github.sha }}
+  APP: clinicacross
+  IMAGE: fernandoa12/clinicacross:${{ github.sha }}
 jobs:
   build:
     runs-on: ubuntu-latest
