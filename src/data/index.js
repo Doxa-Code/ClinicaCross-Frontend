@@ -1004,7 +1004,7 @@ export const variaveisAgendamentos = [
   {
     name: '{{agendamento.procedimento}}',
     label: 'Procedimento',
-    value: agendamento => agendamento.procedimento.descricaoProcedimento
+    value: agendamento => agendamento?.procedimento?.descricaoProcedimento
   },
   {
     name: '{{agendamento.valor}}',

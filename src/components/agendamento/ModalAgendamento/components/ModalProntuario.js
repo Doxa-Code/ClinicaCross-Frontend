@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react'
 import {
   useProntuarioStore,
   useAgendamentoStore,
-  usePayloadStore
+  usePayloadStore,
+  useMenuStore
 } from '../../../../hooks/store'
 import { useFetch } from '../../../../hooks/useFetch'
 import { Input, Select } from '../../../Form'
@@ -28,6 +29,7 @@ export default function ModalProntuario() {
     modelosProntuarios,
     editProntuario
   } = useProntuarioStore(state => state)
+  const { setStateLoading } = useMenuStore()
   const { setAgendamento, agendamento } = useAgendamentoStore(state => state)
   const { create, update } = useFetch()
   const { payload } = usePayloadStore(state => state)
@@ -46,6 +48,7 @@ export default function ModalProntuario() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setStateLoading(true)
     const fields = getFieldsValue(e)
     if (editProntuario) {
       const atendimentoUpdate = agendamento.paciente
@@ -66,7 +69,7 @@ export default function ModalProntuario() {
           prontuario: atendimentoUpdate.prontuario
         }
       )
-      if (error) return
+      if (error) return setStateLoading(false)
       setAgendamento({
         ...agendamento,
         paciente: {
@@ -94,6 +97,7 @@ export default function ModalProntuario() {
         }
       })
     }
+    setStateLoading(false)
     setShowProntuario(false)
   }
 

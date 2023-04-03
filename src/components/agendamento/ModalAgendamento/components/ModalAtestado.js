@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react'
 import {
   useAtestadoStore,
   useAgendamentoStore,
-  usePayloadStore
+  usePayloadStore,
+  useMenuStore
 } from '../../../../hooks/store'
 import { useFetch } from '../../../../hooks/useFetch'
 import { Input, Select } from '../../../Form'
@@ -20,6 +21,7 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
 
 export default function ModalAtestado() {
   const { setShowAtestado, showAtestado, atestado, readOnly, modelosAtestado } = useAtestadoStore(state => state)
+  const { setStateLoading } = useMenuStore()
   const { setAgendamento, agendamento } = useAgendamentoStore(state => state)
   const { create } = useFetch()
   const { payload } = usePayloadStore(state => state)
@@ -32,6 +34,7 @@ export default function ModalAtestado() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setStateLoading(true)
     const fields = getFieldsValue(e)
     const [response, error] = await create(
       `/pacientes/atestado/${agendamento.paciente._id}`,
@@ -41,7 +44,7 @@ export default function ModalAtestado() {
         data
       }
     )
-    if (error) return
+    if (error) return setStateLoading(false)
 
     setAgendamento({
       ...agendamento,
@@ -50,6 +53,7 @@ export default function ModalAtestado() {
         atestado: response
       }
     })
+    setStateLoading(false)
     setShowAtestado(false)
   }
 

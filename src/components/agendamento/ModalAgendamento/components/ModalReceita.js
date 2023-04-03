@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react'
 import {
   useReceitaStore,
   useAgendamentoStore,
-  usePayloadStore
+  usePayloadStore,
+  useMenuStore
 } from '../../../../hooks/store'
 import { useFetch } from '../../../../hooks/useFetch'
 import { Input, Select, SelectSearch } from '../../../Form'
@@ -27,6 +28,7 @@ export default function ModalReceita() {
     modelosReceita
   } = useReceitaStore(state => state)
   const { setAgendamento, agendamento } = useAgendamentoStore(state => state)
+  const { setStateLoading } = useMenuStore()
   const { create } = useFetch()
   const { payload } = usePayloadStore(state => state)
   const [data, mutate] = useState('')
@@ -39,6 +41,7 @@ export default function ModalReceita() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setStateLoading(true)
     const fields = getFieldsValue(e)
     const [response, error] = await create(
       `/pacientes/receita/${agendamento.paciente._id}`,
@@ -48,7 +51,7 @@ export default function ModalReceita() {
         data
       }
     )
-    if (error) return
+    if (error) return setStateLoading(false)
 
     setAgendamento({
       ...agendamento,
@@ -59,6 +62,7 @@ export default function ModalReceita() {
     })
     mutate('')
     setMedicamentosSelected([])
+    setStateLoading(false)
     setShowReceita(false)
   }
 
@@ -99,7 +103,7 @@ export default function ModalReceita() {
 
   return (
     <Modal closeWithEsc open={showReceita} setOpen={setShowReceita}>
-      <div className="bg-white w-full max-w-4xl rounded-xl justify-center items-end">
+      <div className="bg-white w-full max-w-4xl rounded-xl justify-center items-end h-screen overflow-auto">
         <div className="flex justify-between items-center p-5 rounded-t-xl text-pink-500 border-b border-pink-500">
           <span className="text-2xl font-semibold">
             {readOnly ? 'Visualizar Receita' : 'Nova Receita'}
