@@ -9,6 +9,13 @@ import '@fullcalendar/core/main.css'
 import '@fullcalendar/daygrid/main.css'
 import '@fullcalendar/timegrid/main.css'
 
+export async function reportWebVitals(metric) {
+  await fetch('/api/metrics', {
+    body: JSON.stringify(metric),
+    method: 'POST'
+  })
+}
+
 const App = ({ Component, pageProps }) => {
   return (
     <>
