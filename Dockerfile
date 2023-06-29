@@ -10,5 +10,5 @@ COPY next.config.js next.config.js
 RUN yarn install --production
 
 EXPOSE 3000
-CMD [ "yarn", "start" ]
+CMD [ "npm", "run", "start" ]
 
